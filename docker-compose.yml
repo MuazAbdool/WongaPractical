@@ -28,7 +28,7 @@ services:
       - ConnectionStrings__DefaultConnection=Host=postgres;Database=authsystem;Username=postgres;Password=postgres
       - JwtSettings__Issuer=AuthSystem
       - JwtSettings__Audience=AuthSystemUsers
-      - JwtSettings__Secret=your-production-secret-key-min-32-chars
+      - JwtSettings__Secret=${JWT_SECRET:-your-production-secret-key-min-32-chars}
       - JwtSettings__ExpirationMinutes=60
     depends_on:
       postgres:
