@@ -31,35 +31,41 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={{ maxWidth: '400px', margin: '2rem auto', padding: '2rem', border: '1px solid #ccc', borderRadius: '8px' }}>
-      <h2>Login</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+    <div className="max-w-md mx-auto my-8 p-8 border border-gray-300 rounded-lg shadow-lg">
+      <h2 className="text-2xl font-bold mb-6">Login</h2>
+      {error && <p className="text-red-600 mb-4 font-semibold">{error}</p>}
       <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '1rem' }}>
-          <label>Email</label>
+        <div className="mb-4">
+          <label className="block font-semibold">Email</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{ display: 'block', width: '100%', padding: '0.5rem', marginTop: '0.25rem' }}
+            className="block w-full p-2 mt-1 border border-gray-400 rounded focus:outline-none focus:border-primary"
             required
           />
         </div>
-        <div style={{ marginBottom: '1rem' }}>
-          <label>Password</label>
+        <div className="mb-4">
+          <label className="block font-semibold">Password</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{ display: 'block', width: '100%', padding: '0.5rem', marginTop: '0.25rem' }}
+            className="block w-full p-2 mt-1 border border-gray-400 rounded focus:outline-none focus:border-primary"
             required
           />
         </div>
-        <button type="submit" disabled={loading} style={{ width: '100%', padding: '0.75rem', background: '#333', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
+        <button 
+          type="submit" 
+          disabled={loading} 
+          className="w-full py-3 bg-primary text-white font-semibold rounded hover:bg-primaryHover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        >
           {loading ? 'Logging in...' : 'Login'}
         </button>
       </form>
-      <p>Don't have an account? <Link to="/register">Register</Link></p>
+      <p className="mt-4 text-center">
+        Don't have an account? <Link to="/register" className="text-primary hover:text-primaryHover font-semibold">Register</Link>
+      </p>
     </div>
   );
 }

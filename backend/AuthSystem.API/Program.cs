@@ -17,6 +17,25 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+    
+    options.AddPolicy("Production", policy =>
+    {
+        policy.WithOrigins(builder.Configuration.GetSection("AllowedOrigins").Get<string[]>() ?? new[] { "https://yourdomain.com" })
+              .AllowAnyMethod()
+              .AllowAnyHeader()
+              .AllowCredentials();
+    });
+});
+
 // Controllers
 builder.Services.AddControllers();
 
@@ -87,8 +106,19 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
+// Apply pending migrations
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    dbContext.Database.Migrate();
+}
+
+
 // Middleware
 app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+// CORS
+app.UseCors(app.Environment.IsDevelopment() ? "AllowAll" : "Production");
 
 if (app.Environment.IsDevelopment())
 {

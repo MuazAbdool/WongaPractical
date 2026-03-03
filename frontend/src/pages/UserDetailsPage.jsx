@@ -13,16 +13,16 @@ export default function UserDetailsPage() {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p style={{ padding: '2rem' }}>Loading...</p>;
-  if (error) return <p style={{ padding: '2rem', color: 'red' }}>{error}</p>;
+  if (loading) return <p className="p-8 text-center">Loading...</p>;
+  if (error) return <p className="p-8 text-center text-red-600 font-semibold">{error}</p>;
 
   return (
-    <div style={{ maxWidth: '500px', margin: '2rem auto', padding: '2rem', border: '1px solid #ccc', borderRadius: '8px' }}>
-      <h2>Profile</h2>
-      <p><strong>First Name:</strong> {user.firstName}</p>
-      <p><strong>Last Name:</strong> {user.lastName}</p>
-      <p><strong>Email:</strong> {user.email}</p>
-      <p><strong>Member Since:</strong> {new Date(user.createdAt).toLocaleDateString()}</p>
+    <div className="max-w-lg mx-auto my-8 p-8 border border-gray-300 rounded-lg shadow-lg">
+      <h2 className="text-2xl font-bold mb-6">Profile</h2>
+      <p className="mb-2"><strong>First Name:</strong> {user.firstName}</p>
+      <p className="mb-2"><strong>Last Name:</strong> {user.lastName}</p>
+      <p className="mb-2"><strong>Email:</strong> {user.email}</p>
+      <p className="mb-2"><strong>Member Since:</strong> {new Date(user.createdAt).toLocaleDateString()}</p>
     </div>
   );
 }

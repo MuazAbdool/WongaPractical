@@ -11,19 +11,34 @@ export default function Navbar() {
   };
 
   return (
-    <nav style={{ padding: '1rem', background: '#333', color: '#fff', display: 'flex', gap: '1rem', alignItems: 'center' }}>
-      <Link to="/" style={{ color: '#fff', textDecoration: 'none' }}>Home</Link>
+    <nav className="bg-gray-800 text-white px-6 py-4 flex gap-6 items-center">
+      <Link to="/" className="text-white no-underline hover:text-primary transition-colors">
+        Home
+      </Link>
       {isAuthenticated ? (
         <>
-          <Link to="/me" style={{ color: '#fff', textDecoration: 'none' }}>Profile</Link>
-          <button onClick={handleLogout} style={{ marginLeft: 'auto', cursor: 'pointer' }}>Logout</button>
+          <Link to="/me" className="text-white no-underline hover:text-primary transition-colors">
+            Profile
+          </Link>
+          <button 
+            onClick={handleLogout} 
+            className="ml-auto px-4 py-2 bg-primary hover:bg-primaryHover text-white rounded cursor-pointer transition-colors"
+          >
+            Logout
+          </button>
         </>
       ) : (
         <>
-          <Link to="/login" style={{ color: '#fff', textDecoration: 'none' }}>Login</Link>
-          <Link to="/register" style={{ color: '#fff', textDecoration: 'none' }}>Register</Link>
+          <Link to="/login" className="text-white no-underline hover:text-primary transition-colors">
+            Login
+          </Link>
+          <Link to="/register" className="text-white no-underline hover:text-primary transition-colors">
+            Register
+          </Link>
         </>
       )}
     </nav>
   );
 }
+
+
